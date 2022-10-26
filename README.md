@@ -15,17 +15,18 @@ Back-end:
 
 ## Instalando Dependências
 
-> Backend
-```bash
-cd Loja/BackEnd
-npm install
-``` 
+* Backend
+  ```
+  cd Loja/BackEnd
+  npm install
+  ``` 
 
-> Frontend
-```bash
-cd Loja/FronEnd
-npm install
-``` 
+* Frontend
+  ```
+  cd Loja/FronEnd
+  npm install
+  ``` 
+  
 ## Executando aplicação
 
 * Para rodar o back-end:
