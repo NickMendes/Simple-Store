@@ -17,13 +17,13 @@ Back-end:
 
 * Backend
   ```
-  cd Loja/BackEnd
+  cd BackEnd
   npm install
   ``` 
 
 * Frontend
   ```
-  cd Loja/FronEnd
+  cd FronEnd
   npm install
   ``` 
   
@@ -31,11 +31,11 @@ Back-end:
 
 * Para rodar o back-end:
   ```
-  cd Loja/BackEnd
+  cd BackEnd
   npm run dev
   ```
 
 * Para rodar o front-end:
   ```
-  cd Loja/FronEnd
+  cd FronEnd
   npm start
