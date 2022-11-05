@@ -43,7 +43,7 @@ const getByEmail = async (req, res) => {
 };
 
 const add = async (req, res) => {
-  const { data: { user: { name, email, password } } } = req.body;
+  const { data: { userData: { name, email, password } } } = req.body;
   const user = { name, email, password };
   try {
     const result = await UserService.add(user);
