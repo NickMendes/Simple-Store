@@ -9,5 +9,6 @@ app.use(express.json());
 app.use(cors());
 
 app.use('/product', routes.ProductRoute);
+app.use('/user', routes.UserRoute);
 
 module.exports = app;
