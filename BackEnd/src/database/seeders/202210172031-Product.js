@@ -65,7 +65,7 @@ module.exports = {
         url: 'https://cf.shopee.com.br/file/495c75963f8f1d97029fde104879b6f3',
       },
       {
-        id: 1220,
+        id: 1221,
         name: 'Capa de lençol',
         price: 90,
         description: 'Capa de lençol? Cinco reais (vezes 18)',
