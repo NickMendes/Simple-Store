@@ -5,7 +5,7 @@ import Header from '../Components/Header'
 import './Home.css'
 import Footer from '../Components/Footer';
 
-function Home () {
+function Home() {
   const history = useHistory();
 
   const {
@@ -99,7 +99,7 @@ function Home () {
       setApiAll(fakeAPI);
    }
     getApiAll();
-  }, []);
+  }, [setApiAll]);
 
   const handleSearch = (pesquisa) => {
     const result = apiAll.filter((e) => e.name.toLowerCase().indexOf(pesquisa.toLowerCase())> -1);
@@ -121,7 +121,7 @@ function Home () {
       }
       return 0;
     });
-    setUsingApi(result)
+    setUsingApi(result);
   }
 
   const handleBuyButton = (item) => {
@@ -135,28 +135,28 @@ function Home () {
   }
 
   return (
-    <div className='div-all'>
+    <div className="div-all">
       <Header />
       
-      <section className='section-home'>
-        <div className='input-group mb-3'>
-          <label className='input-group-text'>Pesquisa:</label>
+      <section className="section-home">
+        <div className="input-group mb-3">
+          <label className="input-group-text">Pesquisa:</label>
           <input 
             onChange={({ target }) => handleSearch(target.value)}
-            className='form-control' />
+            className="form-control" />
         </div>
 
-        <div className='section-home-btns'>
+        <div className="section-home-btns">
           <button
-            type='button'
-            className='btn btn-secondary'
+            type="button"
+            className="btn btn-secondary"
             onClick={ handleAlfButton  }  
           >
             Alfabético
           </button>
           <button
-            type='button'
-            className='btn btn-secondary'
+            type="button"
+            className="btn btn-secondary"
             onClick={ handleValButton }  
           >
             Preço
@@ -164,27 +164,27 @@ function Home () {
         </div>
       </section>
 
-      <main className='main-all'>
+      <main className="main-all">
         {usingApi.map((ele, index) => (
-          <div key={ele.id} className='main-prod-all'>
-            <div className='main-prod-uni'>
-              <img src={ele.url} alt={ele.name} className='photo-product'/>
+          <div key={ele.id} className="main-prod-all">
+            <div className="main-prod-uni">
+              <img src={ele.url} alt={ele.name} className="photo-product"/>
               <div>
                 <h2>{ele.name}</h2>
                 <h3>{`R$: ${ele.price},00`}</h3>
               </div>
             </div>
-            <div className='main-btns'>
+            <div className="main-btns">
               <button
-                type='button'
-                className='btn btn-secondary'
+                type="button"
+                className="btn btn-secondary"
                 onClick={() => { history.push(`/product/${ele.id}`)}}
               >
                 Saiba Mais
               </button>
               <button
-                type='button'
-                className='btn btn-secondary'
+                type="button"
+                className="btn btn-secondary"
                 onClick={ () => handleBuyButton(ele) }
               >
                 Adicionar ao Carrinho

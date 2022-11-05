@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import GlobalContext from '../contex/GlobalContext';
 
-function Login () {
+function Login() {
   const {
     setNameState,
     setEmailState,
@@ -15,11 +15,11 @@ function Login () {
   const history = useHistory();
 
   const handleClick = () => {
-    var regexEmail =  /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const regexEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
     if (!regexEmail.test(email)) {
       window.alert("Email Inválido");
     }else if (password.length <= 7) {
-      window.alert("Senha fraca. Ela deve ter no mínimo 8 caracteres")
+      window.alert("Senha fraca. Ela deve ter no mínimo 8 caracteres");
     } else {
     setNameState(name);
     setEmailState(email);
