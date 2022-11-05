@@ -1,0 +1,173 @@
+/* Geral */
+.main-all {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: space-around;
+  min-height: 900px;
+  padding: 30px;
+}
+
+.main-prod-all {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.main-prod-uni {
+  align-items: center;
+  background-color: rgb(196, 155, 57);
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  height: 400px;
+  justify-content: space-between;
+  opacity: 90%;
+  width: 266px;
+}
+
+.photo-product {
+  max-width: 170px;
+  max-height: 250px;
+  padding: 10px;
+}
+
+/* Home */
+.section-home {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  margin-bottom: 50px;
+  padding: 20px;
+}
+
+.section-home-btns {
+  display: flex;
+  gap: 20px;
+}
+
+.main-btns {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+/* Login */
+.login-all {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 60px;
+}
+
+/* Profile */
+.profile-all {
+  align-items: center;
+  justify-content: space-around;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  min-height: 600px;
+}
+
+.profile-btns{
+  display: flex;
+  gap: 30px;
+}
+
+/* Cart */
+.cart-section {
+  align-items: center;
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+}
+
+.cart-all {
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  gap: 30px;
+  min-height: 800px;
+}
+
+.rem-btn {
+  padding: 10px;
+}
+
+.photo-product-cart {
+  width: 120px;
+  padding: 10px;
+}
+
+.cart-prod-uni {
+  background-color: rgb(222, 222, 222);
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.cart-prod-all {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Aquisition */
+.aqui-all {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  justify-content: space-around;
+}
+
+/* Product */
+.prod-all {
+  align-items: center;
+  display: flex;
+  justify-content: space-around;
+}
+
+/* Header */
+.header-all {
+  align-items: center;
+  background-color: rgb(252, 183, 20);
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.header-login-done {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+}
+
+.lojinha-logo {
+  width: 100px;
+}
+
+/* Footer */
+.footer-all {
+  align-items: center;
+  background-color: rgb(252, 183, 20);;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 30px;
+  padding: 10px;
+}
+
+.home-logo {
+  max-width: 50px;
+}
+
+.redes-footer {
+  display: flex;
+  gap: 15px;
+}
+
+.logos-footer {
+  max-width: 40px;
+}

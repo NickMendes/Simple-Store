@@ -4,7 +4,7 @@ import Footer from '../Components/Footer';
 import Header from '../Components/Header';
 import GlobalContext from '../contex/GlobalContext';
 
-function Aquisition () {
+function Aquisition() {
   const history = useHistory();
 
   const {
@@ -23,11 +23,11 @@ function Aquisition () {
 
   useEffect(() => {
     const calcTotal = () => {
-      const total = aquiItens.reduce((a, b) => Number(a) + Number(b.price), 0)
+      const total = aquiItens.reduce((a, b) => Number(a) + Number(b.price), 0);
       setTotalState(total);
     }
     calcTotal();
-  }, []);
+  }, [aquiItens]);
 
   const handleEndButton = async () => {
     await setBoughtItens([...boughtItens, ...aquiItens]);
@@ -39,17 +39,17 @@ function Aquisition () {
 
   const handleArquivo = (valor) => {
     if (valor === '' || undefined) {
-      setIsAble(true)
+      setIsAble(true);
     } else {
-      setIsAble(false)
+      setIsAble(false);
     }
   }
 
   return (
     <div>
       <Header />
-      <div className='main-all'>
-        <div className='aqui-all'>
+      <div className="main-all">
+        <div className="aqui-all">
           <div>
             <h2>Produtos sendo comprados:</h2>
             {aquiItens.map((ele) => (
@@ -94,8 +94,8 @@ function Aquisition () {
           </div>
 
           <button
-            type='button'
-            className='btn btn-secondary'
+            type="button"
+            className="btn btn-secondary"
             onClick={handleEndButton}
             disabled={isAble}
           >

@@ -25,15 +25,15 @@ function Product () {
   useEffect(() => {
     const getProduct = () => {
       const product = apiAll.filter((ele) => ele.id === Number(id));
-      setProdState(product)
+      setProdState(product);
     }
 
     getProduct();
-  }, []);
+  }, [id, apiAll]);
   
   const handleBuyButton = (item) => {
     if (nameState === '') {
-      window.alert("Faça login para poder colocar itens no carrinho")
+      window.alert("Faça login para poder colocar itens no carrinho");
     } else {
     setItensCarrinho(itensCarrinho + 1);
     setCartItens([...cartItens, {...item, qty: 1}]);
@@ -55,8 +55,8 @@ function Product () {
             <br></br>
 
             <button
-              type='button'
-              className='btn btn-secondary'
+              type="button"
+              className="btn btn-secondary"
               onClick={ () => handleBuyButton(ele) }
             >
               Adicionar ao Carrinho
