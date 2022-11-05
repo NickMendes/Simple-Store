@@ -9,6 +9,7 @@ import Aquisition from './Pages/Aquisition';
 import Product from './Pages/Product';
 import GlobalProvider from './contex/GlobalProvider';
 import NotFound from './Pages/NotFound';
+import Cadastro from './Pages/Cadastro';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={ Home } />
           <Route exact path="/login" component={ Login } />
+          <Route exact path="/cadastro" component={ Cadastro } />
           <Route exact path="/profile" component={ Profile } />
           <Route exact path="/cart" component={ Cart } />
           <Route exact path="/aquisition" component={ Aquisition } />
