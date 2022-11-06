@@ -1,13 +1,24 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom'
 import Logo from '../imagens/logo.jpg';
 import GlobalContext from '../contex/GlobalContext';
 
 function Header() {
   const {
-    nameState,
     itensCarrinho,
   } = useContext(GlobalContext);
+
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const getName = () => {
+      const userData = localStorage.getItem('user');
+      const username = JSON.parse(userData);
+      setUser(username.name);
+    };
+
+    getName();
+  }, []);
 
   return(
     <header className='header-all'>
@@ -17,20 +28,23 @@ function Header() {
       
       <h1 className='h1'>Lojinha Avulsa</h1>
 
-      {nameState ? (
+      {user ? (
         <div className='header-login-done'>
-          <h3>{nameState}</h3>
           <Link to="/cart">
             <button
               type='button'
               className='btn btn-secondary'
-            >{`Carrinho ${itensCarrinho}`}</button>
+            >
+              {`Carrinho ${itensCarrinho}`}
+            </button>
           </Link>
           <Link to="/profile">
             <button
               type='button'
               className='btn btn-secondary'
-            > Meu Perfil </button>
+            >
+              { user }
+            </button>
           </Link>
         </div>
       ) : (
