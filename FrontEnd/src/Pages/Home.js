@@ -81,7 +81,7 @@ function Home() {
         <div className="input-group mb-3">
           <label className="input-group-text">Pesquisa:</label>
           <input 
-            onChange={({ target }) => handleSearch(target.value)}
+            onChange={ ({ target }) => handleSearch(target.value) }
             className="form-control" />
         </div>
 
@@ -105,19 +105,19 @@ function Home() {
 
       <main className="main-all">
         {usingApi.map((ele, index) => (
-          <div key={ele.id} className="main-prod-all">
+          <div key={ ele.id } className="main-prod-all">
             <div className="main-prod-uni">
-              <img src={ele.url} alt={ele.name} className="photo-product"/>
-              <div>
-                <h2>{ele.name}</h2>
-                <h3>{`R$: ${ele.price},00`}</h3>
+              <img src={ ele.url } alt={ ele.name } className="photo-product"/>
+              <div className="product-title">
+                <h2>{ ele.name }</h2>
+                <h3>{ `R$: ${ele.price.replace('.', ',')}` }</h3>
               </div>
             </div>
             <div className="main-btns">
               <button
                 type="button"
                 className="btn btn-secondary"
-                onClick={() => { history.push(`/product/${ele.id}`)}}
+                onClick={ () => history.push(`/product/${ele.id}`) }
               >
                 Saiba Mais
               </button>
