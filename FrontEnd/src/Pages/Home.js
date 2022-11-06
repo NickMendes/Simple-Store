@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom';
 import GlobalContext from '../contex/GlobalContext';
-import Header from '../Components/Header'
-import './Home.css'
+import Header from '../Components/Header';
 import Footer from '../Components/Footer';
+import './Home.css';
 
 function Home() {
   const history = useHistory();
@@ -13,56 +13,65 @@ function Home() {
     setApiAll,
     cartItens,
     setCartItens,
-    nameState,
     itensCarrinho,
-    setItensCarrinho
+    setItensCarrinho,
   } = useContext(GlobalContext);
   
   const [usingApi, setUsingApi] = useState([]);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
+    const getName = () => {
+      const userData = localStorage.getItem('user');
+      const username = JSON.parse(userData);
+      setUser(username.name);
+    };
+
     const getApiAll = async () => {
       const url = "http://localhost:3002/product";
       const result = await fetch(url).then((response) => response.json());
 
       setUsingApi(result);
       setApiAll(result);
-   }
+    };
+
+    getName();
     getApiAll();
   }, [setApiAll]);
+
 
   const handleSearch = (pesquisa) => {
     const result = apiAll.filter((e) => e.name.toLowerCase().indexOf(pesquisa.toLowerCase())> -1);
     setUsingApi(result);
-  }
+  };
 
   const handleAlfButton = () => {
     const result = [...apiAll].sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
     setUsingApi(result);
-  }
+  };
 
   const handleValButton = () => {
     const result = [...apiAll].sort(function (a, b) {
       if (a.price > b.price) {
         return 1;
-      }
-      if (a.price < b.price) {
+      } else if (a.price < b.price) {
         return -1;
+      } else {
+        return 0;
       }
-      return 0;
     });
     setUsingApi(result);
-  }
+  };
 
   const handleBuyButton = (item) => {
-    if (nameState === '') {
-      window.alert("Faça login para poder colocar itens no carrinho");
+    if (!user) {
+      window.alert('Faça login para poder colocar itens no carrinho');
     } else {
-    setItensCarrinho(itensCarrinho + 1);
-    setCartItens([...cartItens, {...item, qty: 1}]);
-    history.push('/cart');
+      setItensCarrinho(itensCarrinho + 1);
+      setCartItens([...cartItens, {...item, qty: 1}]);
+      history.push('/cart');
     }
-  }
+  };
 
   return (
     <div className="div-all">
