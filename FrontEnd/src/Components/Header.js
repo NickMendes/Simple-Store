@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import Logo from '../imagens/logo.jpg';
 import GlobalContext from '../contex/GlobalContext';
 
@@ -21,39 +21,39 @@ function Header() {
   }, []);
 
   return(
-    <header className='header-all'>
+    <header className="header-all">
       <Link to="/">
-        <img src={Logo} alt="Logo Lojinha" className='lojinha-logo'/>
+        <img src={Logo} alt="Logo Lojinha" className="lojinha-logo"/>
       </Link>
       
-      <h1 className='h1'>Lojinha Avulsa</h1>
+      <h1 className="h1">Lojinha Avulsa</h1>
 
-      {user ? (
-        <div className='header-login-done'>
+      { user ? (
+        <div className="header-login-done">
           <Link to="/cart">
             <button
-              type='button'
-              className='btn btn-secondary'
+              type="button"
+              className="btn btn-secondary"
             >
-              {`Carrinho ${itensCarrinho}`}
+              { `Carrinho ${itensCarrinho}` }
             </button>
           </Link>
           <Link to="/profile">
             <button
-              type='button'
-              className='btn btn-secondary'
+              type="button"
+              className="btn btn-secondary"
             >
               { user }
             </button>
           </Link>
         </div>
       ) : (
-      <div className='header-login'>
+      <div className="header-login">
         <Link to="/login">
-          <button className='btn btn-dark'>Login</button>
+          <button className="btn btn-dark">Login</button>
         </Link>
       </div>
-      )}
+      ) }
     </header>
   )
 }

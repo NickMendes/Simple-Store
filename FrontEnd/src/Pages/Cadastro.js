@@ -16,7 +16,7 @@ function Cadastro() {
     if (name.length <= 12) {
       setErrorMessage('Favor colocar nome e sobrenome');
       setShowError(true);
-    }else if (!regexEmail.test(email)) {
+    } else if (!regexEmail.test(email)) {
       setErrorMessage('Email inválido');
       setShowError(true);
     } else if (password.length <= 7) {
@@ -40,7 +40,6 @@ function Cadastro() {
   return (
     <div className="login-all">
       <h1>Cadatro</h1>
-
       <div className="input-group mb-3 input-login">
         <span className="input-group-text" id="basic-addon1">Nome</span>
         <input
@@ -49,7 +48,7 @@ function Cadastro() {
           className="form-control"
           aria-label="Username"
           aria-describedby="basic-addon1"
-          onChange={({ target }) => setName(target.value)}
+          onChange={ ({ target }) => setName(target.value) }
         />
       </div>
 
@@ -61,7 +60,7 @@ function Cadastro() {
           className="form-control"
           aria-label="Username"
           aria-describedby="basic-addon1"
-          onChange={({ target }) => setEmail(target.value)}
+          onChange={ ({ target }) => setEmail(target.value) }
         />
       </div>
 
@@ -73,21 +72,21 @@ function Cadastro() {
           className="form-control"
           aria-label="Username"
           aria-describedby="basic-addon1"
-          onChange={({ target }) => setPassword(target.value)}
+          onChange={ ({ target }) => setPassword(target.value) }
         />
       </div>
 
       <button
         type="button"
         className="btn btn-secondary"
-        onClick={handleClick}
+        onClick={ handleClick }
       >
         Entrar
       </button>
 
-      {showError && (
+      { showError && (
         <h3>{ errorMessage }</h3>
-      )}
+      ) }
     
     </div>
   );

@@ -104,7 +104,7 @@ function Home() {
       </section>
 
       <main className="main-all">
-        {usingApi.map((ele, index) => (
+        { usingApi.map((ele, index) => (
           <div key={ ele.id } className="main-prod-all">
             <div className="main-prod-uni">
               <img src={ ele.url } alt={ ele.name } className="photo-product"/>
@@ -130,7 +130,7 @@ function Home() {
               </button>
             </div>
           </div>
-        ))}
+        )) }
       </main>
 
       <Footer />
