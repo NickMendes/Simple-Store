@@ -1,32 +1,19 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import GlobalContext from '../contex/GlobalContext';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 import './Home.css';
+import ProductsCard from '../Components/ProductCard';
 
 function Home() {
-  const history = useHistory();
-
   const {
     apiAll,
     setApiAll,
-    cartItens,
-    setCartItens,
-    itensCarrinho,
-    setItensCarrinho,
   } = useContext(GlobalContext);
   
   const [usingApi, setUsingApi] = useState([]);
-  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const getName = () => {
-      const userData = localStorage.getItem('user');
-      const username = JSON.parse(userData);
-      setUser(username.name);
-    };
-
     const getApiAll = async () => {
       const url = "http://localhost:3002/product";
       const result = await fetch(url).then((response) => response.json());
@@ -35,7 +22,6 @@ function Home() {
       setApiAll(result);
     };
 
-    getName();
     getApiAll();
   }, [setApiAll]);
 
@@ -61,16 +47,6 @@ function Home() {
       }
     });
     setUsingApi(result);
-  };
-
-  const handleBuyButton = (item) => {
-    if (!user) {
-      window.alert('Faça login para poder colocar itens no carrinho');
-    } else {
-      setItensCarrinho(itensCarrinho + 1);
-      setCartItens([...cartItens, {...item, qty: 1}]);
-      history.push('/cart');
-    }
   };
 
   return (
@@ -104,32 +80,14 @@ function Home() {
       </section>
 
       <main className="main-all">
-        { usingApi.map((ele, index) => (
-          <div key={ ele.id } className="main-prod-all">
-            <div className="main-prod-uni">
-              <img src={ ele.url } alt={ ele.name } className="photo-product"/>
-              <div className="product-title">
-                <h2>{ ele.name }</h2>
-                <h3>{ `R$: ${ele.price.replace('.', ',')}` }</h3>
-              </div>
-            </div>
-            <div className="main-btns">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                onClick={ () => history.push(`/product/${ele.id}`) }
-              >
-                Saiba Mais
-              </button>
-              <button
-                type="button"
-                className="btn btn-secondary"
-                onClick={ () => handleBuyButton(ele) }
-              >
-                Adicionar ao Carrinho
-              </button>
-            </div>
-          </div>
+        { usingApi.map((ele) => (
+          <ProductsCard
+            key={ ele.id }
+            id={ ele.id }
+            name={ ele.name }
+            url={ ele.url }
+            price={ ele.price }
+          />
         )) }
       </main>
 
