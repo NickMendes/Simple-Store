@@ -4,28 +4,13 @@ import GlobalContext from './GlobalContext';
 
 function GlobalProvider({ children }) {
   const [apiAll, setApiAll] = useState([]);
-  const [cartItens, setCartItens] = useState([]);
-  const [nameState, setNameState] = useState('');
-  const [emailState, setEmailState] = useState('');
-  const [aquiItens, setAquiItens] = useState([]);
-  const [boughtItens, setBoughtItens] = useState([]);
-  const [itensCarrinho, setItensCarrinho] = useState(0);
+  const [att, setAtt] = useState(true);
 
   const contextValues = {
     apiAll,
     setApiAll,
-    cartItens,
-    setCartItens,
-    nameState,
-    setNameState,
-    emailState,
-    setEmailState,
-    aquiItens,
-    setAquiItens,
-    boughtItens,
-    setBoughtItens,
-    itensCarrinho,
-    setItensCarrinho,
+    att,
+    setAtt,
   }
 
   return(
