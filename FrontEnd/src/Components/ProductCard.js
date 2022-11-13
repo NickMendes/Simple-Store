@@ -23,7 +23,6 @@ function ProductsCard({ id, name, price, url }) {
       const cartLS = JSON.parse(localStorage.getItem('cart')) || [];
       const cartFiltered = cartLS.filter((ele) => ele.id !== id);
       const itemQty = cartLS.filter((ele) => ele.id === id);
-      console.log(itemQty.qty);
       if (itemQty.length !== 0) {
         const newQty = itemQty[0].qty + 1;
         const newCart = [...cartFiltered, { id, name, price, url, qty: newQty }];
