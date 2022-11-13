@@ -16,8 +16,12 @@ function Header() {
 
     const getQty = () => {
       const cartLS = JSON.parse(localStorage.getItem('cart'));
-      const qty = cartLS.reduce((acc, cur) => acc + cur.qty, 0);
-      setItensQty(qty);
+      if (cartLS) {
+        const qty = cartLS.reduce((acc, cur) => acc + cur.qty, 0);
+        setItensQty(qty);
+      } else {
+        setItensQty(0);
+      }
     };
 
     getQty()
