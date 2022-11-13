@@ -31,7 +31,9 @@ function Cart() {
 
   const handleBuyButton = () => {
     if (cartRender.length !== 0) {
-      console.log(cartRender);
+      const cartLS = JSON.parse(localStorage.getItem('cart'));
+      localStorage.setItem('aquisition', JSON.stringify(cartLS));
+      localStorage.removeItem('cart');
       history.push('/aquisition');
     } else {
       window.alert('Não há nada no seu carrinho para ser comprado');

@@ -1,40 +1,35 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Footer from '../Components/Footer';
 import Header from '../Components/Header';
-import GlobalContext from '../contex/GlobalContext';
 
 function Aquisition() {
   const history = useHistory();
-
-  const {
-    aquiItens,
-    boughtItens,
-    setBoughtItens,
-    setAquiItens,
-    setCartItens,
-    nameState,
-    emailState,
-    setItensCarrinho,
-  } = useContext(GlobalContext);
   
-  const [totalState, setTotalState] = useState('');
+  const [totalState, setTotalState] = useState(0);
   const [isAble, setIsAble] = useState(true);
+  const [aquiRender, setAquiRender] = useState([]);
+  const [user, setUser] = useState([]);
 
   useEffect(() => {
     const calcTotal = () => {
-      const total = aquiItens.reduce((a, b) => Number(a) + Number(b.price), 0);
+      const aquiItens = JSON.parse(localStorage.getItem('aquisition')) || [];
+      setAquiRender(aquiItens);
+      const total = aquiItens.reduce((acc, cur) => Number(acc) + Number(cur.price * cur.qty), 0);
       setTotalState(total);
     };
 
-    calcTotal();
-  }, [aquiItens]);
+    const getName = () => {
+      const userLS = JSON.parse(localStorage.getItem('user'));
+      setUser(userLS);
+    };
 
-  const handleEndButton = async () => {
-    await setBoughtItens([...boughtItens, ...aquiItens]);
-    setAquiItens([]);
-    setCartItens([]);
-    setItensCarrinho(0);
+    getName();
+    calcTotal();
+  }, []);
+
+  const handleEndButton = () => {
+    console.log('comprado');
     history.push('/');
   };
 
@@ -52,12 +47,27 @@ function Aquisition() {
       <div className="aqui-all">
         <div>
           <h2>Produtos sendo comprados:</h2>
-          { aquiItens.map((ele) => (
-          <div key={ ele.id }>
-            <p>{ `${ele.name} - R$ ${ele.price}` }</p>
-          </div>
-        )) }
-        <h3>{ `Total: R$ ${totalState}` } </h3>
+          <table className="table">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Quantidade</th>
+                <th>Valor Unitário</th>
+                <th>Valor Total</th>
+              </tr>
+            </thead>
+            <tbody>
+                { aquiRender.map((ele) => (
+                <tr key={ ele.id }>
+                  <th>{ ele.name }</th>
+                  <th>{ ele.qty }</th>
+                  <th>{ `R$ ${ele.price.replace('.', ',')}` }</th>
+                  <th>{ `R$ ${(ele.price * ele.qty).toFixed(2).replace('.', ',')}` }</th>
+                </tr>
+              )) }
+            </tbody>
+          </table>
+        <h3>{ `Total: R$ ${totalState.toFixed(2).replace('.', ',')}` } </h3>
         </div>
         
         <div>
@@ -69,7 +79,7 @@ function Aquisition() {
               className="form-control"
               aria-label="Username"
               aria-describedby="basic-addon1"
-              defaultValue={ nameState }
+              defaultValue={ user.name }
             />
           </div>
           <div className="input-group mb-3 input-login">
@@ -79,7 +89,7 @@ function Aquisition() {
               className="form-control"
               aria-label="Username"
               aria-describedby="basic-addon1"
-              defaultValue={ emailState }
+              defaultValue={ user.email }
             />
           </div>
           <div className="input-group mb-3">
