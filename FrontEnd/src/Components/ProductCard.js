@@ -1,43 +1,39 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import GlobalContext from '../contex/GlobalContext';
 
 function ProductsCard({ id, name, price, url }) {
   const history = useHistory();
 
-  const {
-    cartItens,
-    setCartItens,
-    itensCarrinho,
-    setItensCarrinho,
-  } = useContext(GlobalContext);
-
-  const [qty, setQty] = useState(0);
   const [user, setUser] = useState(null);
 
   useEffect(() => {
     const getName = () => {
-      const userData = localStorage.getItem('user');
-      const username = JSON.parse(userData);
-      setUser(username.name);
+      const userData = JSON.parse(localStorage.getItem('user'));
+      setUser(userData.name);
     };
 
     getName();
   }, []);
 
-  const handleBuyButton = (name, id, price, url, qty) => {
-    const newQty = qty + 1;
-    setQty(newQty); 
-
+  const handleBuyButton = (id, name, price, url) => {
     if (!user) {
       window.alert('Faça login para poder colocar itens no carrinho');
     } else {
-      const prodFiltered = cartItens.filter((ele) => ele.id !== id);
-      setItensCarrinho(itensCarrinho + 1);
-      setCartItens([...prodFiltered, { id, name, price, url, qty: newQty }]);
-      history.push('/cart');
-    
+      const cartLS = JSON.parse(localStorage.getItem('cart')) || [];
+      const cartFiltered = cartLS.filter((ele) => ele.id !== id);
+      const itemQty = cartLS.filter((ele) => ele.id === id);
+      console.log(itemQty.qty);
+      if (itemQty.length !== 0) {
+        const newQty = itemQty[0].qty + 1;
+        const newCart = [...cartFiltered, { id, name, price, url, qty: newQty }];
+        localStorage.setItem('cart', JSON.stringify(newCart));
+        history.push('/cart');
+      } else {
+        const newCart = [...cartFiltered, { id, name, price, url, qty: 1 }];
+        localStorage.setItem('cart', JSON.stringify(newCart));
+        history.push('/cart');
+      }
     }
   };
   
@@ -61,7 +57,7 @@ function ProductsCard({ id, name, price, url }) {
         <button
           type="button"
           className="btn btn-secondary"
-          onClick={ () => handleBuyButton(id, name, price, url, qty) }
+          onClick={ () => handleBuyButton(id, name, price, url) }
         >
           Adicionar ao Carrinho
         </button>
