@@ -140,6 +140,10 @@
   justify-content: space-around;
 }
 
+.img-about {
+  max-width: 400px;
+}
+
 /* Header */
 .header-all {
   align-items: center;
@@ -180,4 +184,8 @@
 
 .logos-footer {
   max-width: 40px;
+}
+
+.pages {
+  min-height: 520px;
 }
