@@ -1,24 +1,28 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Logo from '../imagens/logo.jpg';
 import GlobalContext from '../contex/GlobalContext';
+import Logo from '../imagens/logo.jpg';
 
 function Header() {
-  const {
-    itensCarrinho,
-  } = useContext(GlobalContext);
-
+  const {att} = useContext(GlobalContext);
   const [user, setUser] = useState(null);
+  const [itensQty, setItensQty] = useState(0);
 
   useEffect(() => {
     const getName = () => {
-      const userData = localStorage.getItem('user');
-      const username = JSON.parse(userData);
-      setUser(username.name);
+      const userData = JSON.parse(localStorage.getItem('user'));
+      setUser(userData.name);
     };
 
+    const getQty = () => {
+      const cartLS = JSON.parse(localStorage.getItem('cart'));
+      const qty = cartLS.reduce((acc, cur) => acc + cur.qty, 0);
+      setItensQty(qty);
+    };
+
+    getQty()
     getName();
-  }, []);
+  }, [att]);
 
   return(
     <header className="header-all">
@@ -35,7 +39,7 @@ function Header() {
               type="button"
               className="btn btn-secondary"
             >
-              { `Carrinho ${itensCarrinho}` }
+              { `Carrinho: ${itensQty}` }
             </button>
           </Link>
           <Link to="/profile">
