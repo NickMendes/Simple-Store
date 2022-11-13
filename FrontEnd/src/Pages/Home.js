@@ -38,9 +38,9 @@ function Home() {
 
   const handleValButton = () => {
     const result = [...apiAll].sort(function (a, b) {
-      if (a.price > b.price) {
+      if (Number(a.price) > Number(b.price)) {
         return 1;
-      } else if (a.price < b.price) {
+      } else if (Number(a.price) < Number(b.price)) {
         return -1;
       } else {
         return 0;
