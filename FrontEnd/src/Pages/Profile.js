@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
+import GlobalContext from '../contex/GlobalContext';
 import Footer from '../Components/Footer';
 import Header from '../Components/Header';
-import GlobalContext from '../contex/GlobalContext';
 
 function Profile() {
   const {
@@ -11,25 +11,25 @@ function Profile() {
 
   const btnNotPossible = () => {
     window.alert("Esse botão ainda não está funcionando, pedimos desculpas pelo inconveniente");
-  }
+  };
 
   return (
     <div>
       <Header />
       <div className="profile-all">
-        <h1>{`Olá ${nameState}`}</h1>
+        <h1>{ `Olá ${nameState}` }</h1>
         <div className="profile-btns">
           <button
             type="button"
             className="btn btn-secondary"
-            onClick={btnNotPossible}
+            onClick={ btnNotPossible }
           >
             Editar Perfil
           </button>
           <button
             type="button"
             className="btn btn-secondary"
-            onClick={btnNotPossible}
+            onClick={ btnNotPossible }
           >
             Deletar Perfil
           </button>
@@ -38,12 +38,12 @@ function Profile() {
 
         <h2>Suas assinaturas:</h2>
         <div className="main-all">
-          {boughtItens.map((ele) => (
+          { boughtItens.map((ele) => (
             <div className="main-prod-uni">
-              <img src={ele.url} alt={ele.name} className="photo-product" />
+              <img src={ ele.url } alt={ ele.name } className="photo-product" />
               <div>
-                <h2>{ele.name}</h2>
-                <h4>{`R$: ${ele.price},00`}</h4>
+                <h2>{ ele.name }</h2>
+                <h4>{ `R$: ${ele.price},00` }</h4>
               </div>
             </div>
             ))}

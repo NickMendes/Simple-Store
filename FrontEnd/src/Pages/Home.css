@@ -11,8 +11,8 @@
 .main-prod-all {
   align-items: center;
   display: flex;
-  flex-wrap: wrap;
   flex-direction: column;
+  flex-wrap: wrap;
   gap: 15px;
 }
 
@@ -29,17 +29,27 @@
 }
 
 .photo-product {
-  max-width: 170px;
   max-height: 250px;
+  max-width: 170px;
   padding: 10px;
+}
+
+.product-title{
+  align-items: flex-start;
+  background-color: rgb(252, 183, 20);
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  width: 100%;
 }
 
 /* Home */
 .section-home {
   align-items: center;
   display: flex;
-  gap: 10px;
   flex-direction: column;
+  gap: 10px;
   margin-bottom: 50px;
   padding: 20px;
 }
@@ -65,10 +75,10 @@
 /* Profile */
 .profile-all {
   align-items: center;
-  justify-content: space-around;
   display: flex;
   flex-direction: column;
   gap: 50px;
+  justify-content: space-around;
   min-height: 600px;
 }
 
@@ -88,9 +98,9 @@
 .cart-all {
   display: flex;
   flex-direction: column;
-  padding: 30px;
   gap: 30px;
   min-height: 800px;
+  padding: 30px;
 }
 
 .rem-btn {
@@ -98,8 +108,8 @@
 }
 
 .photo-product-cart {
-  width: 120px;
   padding: 10px;
+  width: 120px;
 }
 
 .cart-prod-uni {
@@ -130,6 +140,10 @@
   justify-content: space-around;
 }
 
+.img-about {
+  max-width: 400px;
+}
+
 /* Header */
 .header-all {
   align-items: center;
@@ -146,7 +160,7 @@
 }
 
 .lojinha-logo {
-  width: 100px;
+  width: 150px;
 }
 
 /* Footer */
@@ -170,4 +184,8 @@
 
 .logos-footer {
   max-width: 40px;
+}
+
+.pages {
+  min-height: 520px;
 }

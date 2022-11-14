@@ -26,7 +26,7 @@ function Login() {
     if (!regexEmail.test(email)) {
       setErrorMessage('Email inválido');
       setShowError(true);
-    }else if (password.length <= 7) {
+    } else if (password.length <= 7) {
       setErrorMessage('Senha fraca. Ela deve ter no mínimo 8 caracteres.');
       setShowError(true);
     } else {
@@ -55,7 +55,7 @@ function Login() {
           className="form-control"
           aria-label="Username"
           aria-describedby="basic-addon1"
-          onChange={({ target }) => setEmail(target.value)}
+          onChange={ ({ target }) => setEmail(target.value) }
         />
       </div>
 
@@ -67,14 +67,14 @@ function Login() {
           className="form-control"
           aria-label="Username"
           aria-describedby="basic-addon1"
-          onChange={({ target }) => setPassword(target.value)}
+          onChange={ ({ target }) => setPassword(target.value) }
         />
       </div>
 
       <button
         type="button"
         className="btn btn-secondary"
-        onClick={handleClick}
+        onClick={ handleClick }
       >
         Entrar
       </button>
@@ -83,14 +83,14 @@ function Login() {
       <button
         type="button"
         className="btn btn-secondary"
-        onClick={ () => history.push('/cadastro')}
+        onClick={ () => history.push('/cadastro') }
       >
         Cadastrar Novo Cliente
       </button>
 
-      {showError && (
+      { showError && (
         <h3>{ errorMessage }</h3>
-      )}
+      ) }
     
     </div>
   );

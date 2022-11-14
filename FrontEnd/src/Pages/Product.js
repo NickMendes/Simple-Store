@@ -1,69 +1,79 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
+import axios from 'axios';
 import Footer from '../Components/Footer';
 import Header from '../Components/Header';
-import GlobalContext from '../contex/GlobalContext';
 
 function Product () {
   const history = useHistory();
-
-  const {
-    apiAll,
-    itensCarrinho,
-    setItensCarrinho,
-    setCartItens,
-    cartItens,
-    nameState,
-  } = useContext(GlobalContext);
   
-  const [prodState, setProdState] = useState([]);
+  const [user, setUser] = useState(null);
+  const [prodState, setProdState] = useState({});
   
   const params = useParams();
   const id = Object.values(params)[0];
 
   
   useEffect(() => {
-    const getProduct = () => {
-      const product = apiAll.filter((ele) => ele.id === Number(id));
+    const getUser = () => {
+      const userLS = JSON.parse(localStorage.getItem('user'));
+      setUser(userLS);
+    };
+
+    getUser();
+  }, [])
+
+  useEffect(() => {
+    const getProduct = async () => {
+      const productAPI = await axios.get(`http://localhost:3002/product/${id}`);
+      const product = productAPI.data;
       setProdState(product);
-    }
+    };
 
     getProduct();
-  }, [id, apiAll]);
-  
-  const handleBuyButton = (item) => {
-    if (nameState === '') {
-      window.alert("Faça login para poder colocar itens no carrinho");
+  }, [id]);
+
+  const handleBuyButton = ({ id, name, price, url }) => {
+    if (!user) {
+      window.alert('Faça login para poder colocar itens no carrinho');
     } else {
-    setItensCarrinho(itensCarrinho + 1);
-    setCartItens([...cartItens, {...item, qty: 1}]);
-    history.push('/cart');
+      const cartLS = JSON.parse(localStorage.getItem('cart')) || [];
+      const cartFiltered = cartLS.filter((ele) => ele.id !== id);
+      const itemQty = cartLS.filter((ele) => ele.id === id);
+      if (itemQty.length !== 0) {
+        const newQty = itemQty[0].qty + 1;
+        const newCart = [...cartFiltered, { id, name, price, url, qty: newQty }];
+        localStorage.setItem('cart', JSON.stringify(newCart));
+        history.push('/cart');
+      } else {
+        const newCart = [...cartFiltered, { id, name, price, url, qty: 1 }];
+        localStorage.setItem('cart', JSON.stringify(newCart));
+        history.push('/cart');
+      }
     }
-  }
+  };
 
   return (
     <div>
       <Header />
-      {prodState.map((ele) => (
-        <div key={ele.id} className="prod-all">
-          <img src={ele.url} alt={ele.name} />
-          <div>
-            <h1>{ele.name}</h1>
-            <h2>{`R$: ${ele.price},00`}</h2>
-            <h3>{ele.description}</h3>
+      <div key={ prodState.id } className="prod-all pages">
+        <img src={ prodState.url } alt={ prodState.name } className="img-about"/>
+        <div>
+          <h1>{ prodState.name }</h1>
+          <h2>{ `R$: ${prodState.price}` }</h2>
+          <h3>{ prodState.description }</h3>
 
-            <br></br>
+          <br></br>
 
-            <button
-              type="button"
-              className="btn btn-secondary"
-              onClick={ () => handleBuyButton(ele) }
-            >
-              Adicionar ao Carrinho
-            </button>
-          </div>
+          <button
+            type="button"
+            className="btn btn-secondary"
+            onClick={ () => handleBuyButton(prodState) }
+          >
+            Adicionar ao Carrinho
+          </button>
         </div>
-      ))}
+      </div>
       <Footer />
     </div>
   );
