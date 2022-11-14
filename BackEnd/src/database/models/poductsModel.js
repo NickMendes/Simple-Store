@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const Product = sequelize.define("Product", {
+  const Products = sequelize.define("Products", {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     name: DataTypes.STRING,
     price: DataTypes.INTEGER,
@@ -11,5 +11,5 @@ module.exports = (sequelize, DataTypes) => {
     tableName: 'Products',
   });
 
-  return Product;
+  return Products;
 };

@@ -1,12 +1,12 @@
 const md5 = require('md5');
-const { User } = require('../database/models');
+const { Users } = require('../database/models');
 const Token = require('../middlewares/token');
 
-const getAll = async () => User.findAll();
+const getAll = async () => Users.findAll();
 
 const getByEmailAndPassword = async (email, password) => {
   const senha = md5(password);
-  const result = await User.findOne({ where: { email, password: senha } });
+  const result = await Users.findOne({ where: { email, password: senha } });
   if (!result || result === null) return { status: 404, message: 'Email ou Senha inválidos' };
   const token = Token.createToken(email);
   const finalResult = {
@@ -18,18 +18,18 @@ const getByEmailAndPassword = async (email, password) => {
 };
 
 const getByEmail = async (email) => {
-  const result = await User.findOne({ where: { email } });
+  const result = await Users.findOne({ where: { email } });
   return result.dataValues.id;
 };
 
 const getByPk = async (id) => {
-    const result = await User.findOne({ where: { id } });
+    const result = await Users.findOne({ where: { id } });
     return result;
 };
 
 const add = async ({ name, email, password }) => {
   const senha = md5(password);
-  const [result, create] = await User.findOrCreate({ where: { email },
+  const [result, create] = await Users.findOrCreate({ where: { email },
     defaults: { name, email, password: senha },
   });
   const token = Token.createToken(email);
@@ -43,11 +43,11 @@ const add = async ({ name, email, password }) => {
 };
 
 const update = async ({ id, name, email, password }) => {
-  User.update({ name, email, password }, { where: { id } });
+  Users.update({ name, email, password }, { where: { id } });
 
-  return User.findByPk(id);
+  return Users.findByPk(id);
 };
 
-const destroy = async (id) => User.destroy({ where: { id } });
+const destroy = async (id) => Users.destroy({ where: { id } });
 
 module.exports = { getByPk, getAll, getByEmailAndPassword, getByEmail, add, update, destroy };
