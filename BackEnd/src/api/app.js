@@ -11,5 +11,6 @@ app.use(cors());
 app.use('/product', routes.ProductRoute);
 app.use('/user', routes.UserRoute);
 app.use('/sale', routes.SaleRoute);
+app.use('/saleproduct', routes.SaleProductRoute);
 
 module.exports = app;
