@@ -9,7 +9,7 @@ function ProductsCard({ id, name, price, url }) {
 
   useEffect(() => {
     const getName = () => {
-      const userData = JSON.parse(localStorage.getItem('user'));
+      const userData = JSON.parse(localStorage.getItem('user')) || {};
       setUser(userData.name);
     };
 

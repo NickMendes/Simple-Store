@@ -12,7 +12,7 @@ saleProductRoute.route('/:id')
   .put(SaleProductController.update)
   .delete(SaleProductController.destroy);
 
-saleProductRoute.route('/saleId')
+saleProductRoute.route('/saleId/:saleId')
   .post(SaleProductController.getById);
 
 module.exports = saleProductRoute;
