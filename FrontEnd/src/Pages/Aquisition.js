@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Footer from '../Components/Footer';
 import Header from '../Components/Header';
+import axios from 'axios';
 
 function Aquisition() {
   const history = useHistory();
@@ -28,8 +29,29 @@ function Aquisition() {
     calcTotal();
   }, []);
 
-  const handleEndButton = () => {
-    console.log('comprado');
+  const handleEndButton = async () => {
+    const userIdData = await axios.get(`http://localhost:3002/user/email/${user.email}`);
+    const userId = userIdData.data;
+
+    const sale = {
+      userId,
+      totalPrice: totalState,
+      saleDate: new Date(),
+      status: 'Aguardando confirmação',
+    };
+
+    const resultSale = await axios.post('http://localhost:3002/sale', sale);
+
+    aquiRender.map((ele) => {
+      const saleProd = {
+        saleId: resultSale.data.id,
+        productId: ele.id,
+        quantity: ele.qty,
+      };
+
+      axios.post('http://localhost:3002/saleproduct', saleProd);
+    });
+
     history.push('/');
   };
 
