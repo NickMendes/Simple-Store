@@ -1,0 +1,55 @@
+version: "3.9"
+services:
+  frontend:
+    build: ./FrontEnd
+    container_name: "simple-store-front"
+    platform: linux/x86_64
+    working_dir: /app-frontend
+    ports:
+      -3000:3000
+    volumes:
+      - .:/app-frontend
+    depends_on:
+      backend:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "lsof", "-t", "-i:3000"]
+      timeout: 10s
+      retries: 5
+  backend:
+    build: ./BackEnd
+    container_name: "simple-store-back"
+    platform: linux/x86_64
+    working_dir: /app-backend
+    ports:
+      -3002:3002
+    volumes:
+      - .:/app-backend
+    environment:
+      - NODE_ENV=test
+      - API_PORT=3002
+      - MYSQL_HOST=localhost
+      - MYSQL_PORT=3306
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=sua_senha
+      - MYSQL_DB_NAME=simpleStore
+    depends_on:
+      - "mysql"
+    healthcheck:
+      test: ["CMD", "lsof", "-t", "-i:3002"]
+      timeout: 10s
+      retries: 5
+  mysql:
+    image: mysql:8
+    container_name: "simple-store-mysql"
+    platform: linux/x86_64
+    ports:
+      - 3306:3306
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD: sua_senha
+      - MYSQL_DATABASE: simpleStore
+    volumes:
+      - .:/var/lib/mysql
+    cap_add:
+      - SYS_NICE
